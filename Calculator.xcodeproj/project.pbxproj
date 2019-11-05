@@ -13,6 +13,7 @@
 		6999100023715656009B9663 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69990FFE23715656009B9663 /* Main.storyboard */; };
 		6999100223715658009B9663 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6999100123715658009B9663 /* Assets.xcassets */; };
 		6999100523715658009B9663 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6999100323715658009B9663 /* LaunchScreen.storyboard */; };
+		6999100D2371B03B009B9663 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6999100C2371B03B009B9663 /* Calculator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		6999100123715658009B9663 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6999100423715658009B9663 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6999100623715658009B9663 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6999100C2371B03B009B9663 /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				69990FF823715656009B9663 /* AppDelegate.swift */,
 				69990FFA23715656009B9663 /* SceneDelegate.swift */,
 				69990FFC23715656009B9663 /* ViewController.swift */,
+				6999100C2371B03B009B9663 /* Calculator.swift */,
 				69990FFE23715656009B9663 /* Main.storyboard */,
 				6999100123715658009B9663 /* Assets.xcassets */,
 				6999100323715658009B9663 /* LaunchScreen.storyboard */,
@@ -139,6 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				69990FFD23715656009B9663 /* ViewController.swift in Sources */,
+				6999100D2371B03B009B9663 /* Calculator.swift in Sources */,
 				69990FF923715656009B9663 /* AppDelegate.swift in Sources */,
 				69990FFB23715656009B9663 /* SceneDelegate.swift in Sources */,
 			);
@@ -287,7 +291,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9KRVCD6899;
 				INFOPLIST_FILE = Calculator/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -306,7 +310,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9KRVCD6899;
 				INFOPLIST_FILE = Calculator/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
