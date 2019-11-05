@@ -241,6 +241,9 @@
                                                 <state key="normal" title="=">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="countButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="S49-nu-34h"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>

@@ -13,43 +13,51 @@ class ViewController: UIViewController {
     @IBOutlet var mathButtons: [UIButton]!
     @IBOutlet weak var resultButton: UIButton!
     
-    var operand: Double = 0
+    var operand: String = "0"
     var calculator: Calculator!
     
+    var lastPressedButton: UIButton!
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
     }
     
     func updateUI() {
-        textLabel.text = "0"
+        textLabel.text = operand
     }
-
+    
     @IBAction func digitButtonPressed(_ sender: UIButton) {
-        if operand == 0 {
-            textLabel.text = "0"
-        }
         
-        if textLabel.text!.count >= 9 {
+        if operand.count >= 9 {
             return
         }
-        if textLabel.text == "0" {
-            textLabel.text = sender.title(for: .normal)
-            guard let text = textLabel.text else {return}
-            operand = Double(text)!
+        
+        if operand == "0" {
+            operand = sender.title(for: .normal)!
         } else {
-            textLabel.text! += sender.title(for: .normal)!
-            operand = Double(textLabel.text!)!
+            operand += sender.title(for: .normal)!
         }
+        
+        updateUI()
     }
     
     @IBAction func operatorButtonPressed(_ sender: UIButton) {
-        calculator = Calculator(operand: operand, operation: sender.title(for: .normal)!)
-        operand = 0
+        if lastPressedButton != nil,
+            mathButtons.contains(lastPressedButton) {
+            countButtonPressed()
+        }
+        
+        self.lastPressedButton = sender
+        calculator = Calculator(result: Double(operand)!, operand: 0, operation: sender.title(for: .normal)!)
+        operand = "0"
     }
     
+    @IBAction func countButtonPressed() {
+        calculator.operand = Double(operand)!
+        operand = String(calculator.calculate)
+        updateUI()
+    }
     
 }
 
