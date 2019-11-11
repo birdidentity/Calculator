@@ -1,29 +1,22 @@
 import Foundation
 
 struct Calculator {
-    var result: Double = 0
-    var operand: Double
+    var operands: [Double]
     var operation: String
+
     
-    var calculate: Double {
+    var result: Double {
         switch operation {
         case "+":
-            return result + operand
+            return operands[0] + operands[1]
         case "x":
-            return result * operand
+            return operands[0] * operands[1]
         case "/":
-            return result / operand
+            return operands[0] / operands[1]
         case "-":
-            return result - operand
+            return operands[0] - operands[1]
         default:
-            return 0
+            return operands[0]
         }
     }
-}
-
-enum Operator: String {
-    case plus = "+"
-    case minus = "-"
-    case divide = "/"
-    case multiply = "x"
 }

@@ -29,34 +29,47 @@ class ViewController: UIViewController {
     
     @IBAction func digitButtonPressed(_ sender: UIButton) {
         
-        if operand.count >= 9 {
-            return
-        }
+        guard let digit = sender.title(for: .normal) else {return}
         
         if operand == "0" {
-            operand = sender.title(for: .normal)!
+            operand = digit
+        } else if operand.count >= 9 {
+            return
         } else {
-            operand += sender.title(for: .normal)!
+            operand += digit
         }
+        
         
         updateUI()
     }
     
     @IBAction func operatorButtonPressed(_ sender: UIButton) {
-        if lastPressedButton != nil,
-            mathButtons.contains(lastPressedButton) {
-            countButtonPressed()
+        
+        guard let operand = Double(operand) else {return}
+        guard let operation = sender.title(for: .normal) else {return}
+                
+        if calculator == nil {
+            calculator = Calculator(operands: [operand], operation: "??")
+            return
         }
         
-        self.lastPressedButton = sender
-        calculator = Calculator(result: Double(operand)!, operand: 0, operation: sender.title(for: .normal)!)
-        operand = "0"
+        
+        calculator.operands.append(operand)
+
     }
     
-    @IBAction func countButtonPressed() {
-        calculator.operand = Double(operand)!
-        operand = String(calculator.calculate)
+    @IBAction func resetButtonPressed() {
+        calculator = nil
+        operand = "0"
         updateUI()
+    }
+    
+    
+    
+    @IBAction func countButtonPressed() {
+        let result = calculator.result
+        calculator.operands[0] = result
+        textLabel.text = "\(result)"
     }
     
 }
