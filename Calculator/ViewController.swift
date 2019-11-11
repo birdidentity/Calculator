@@ -24,6 +24,9 @@ class ViewController: UIViewController {
     }
     
     func updateUI() {
+        if operand.hasSuffix(".0") {
+            operand.removeLast(2)
+        }
         textLabel.text = operand
     }
     
@@ -64,6 +67,22 @@ class ViewController: UIViewController {
         updateUI()
     }
     
+    @IBAction func negativeOrPositivePressed() {
+        if operand.contains("-") {
+            operand.remove(at: operand.index(operand.startIndex, offsetBy: 0))
+        } else {
+            operand = "-" + operand
+        }
+        updateUI()
+    }
+    
+    @IBAction func percentButtonPressed() {
+        guard var unwrappedOperand = Double(operand) else {return}
+        
+        unwrappedOperand = unwrappedOperand / 100
+        operand = String(unwrappedOperand)
+        updateUI()
+    }
     
     
     @IBAction func countButtonPressed() {
