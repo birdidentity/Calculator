@@ -55,6 +55,14 @@ class ViewController: UIViewController {
     
     @IBAction func operatorButtonPressed(_ sender: UIButton) {
         
+        if sender.isSelected {
+            return
+        } else {
+            sender.isSelected = true
+            sender.backgroundColor = .white
+            sender.setTitleColor(.black, for: .selected)
+        }
+        
         guard let operand = Double(operand) else {return}
         guard let operation = sender.title(for: .normal) else {return}
                 
