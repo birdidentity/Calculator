@@ -24,10 +24,17 @@ class ViewController: UIViewController {
     }
     
     func updateUI() {
-        if operand.hasSuffix(".0") {
+        if let lastPressed = lastPressedButton, !digitButtons.contains(lastPressed), operand.hasSuffix(".0") {
             operand.removeLast(2)
         }
         textLabel.text = operand
+        
+        if operand != "0" ||
+            calculator != nil {
+            resetButton.setTitle("C", for: .normal)
+        } else {
+            resetButton.setTitle("AC", for: .normal)
+        }
     }
     
     @IBAction func digitButtonPressed(_ sender: UIButton) {
@@ -42,7 +49,7 @@ class ViewController: UIViewController {
             operand += digit
         }
         
-        
+        lastPressedButton = sender
         updateUI()
     }
     
@@ -52,20 +59,23 @@ class ViewController: UIViewController {
         guard let operation = sender.title(for: .normal) else {return}
                 
         if calculator == nil {
-            calculator = Calculator(operands: [operand], operation: "??")
-            return
+            calculator = Calculator(operands: [operand], operation: operation)
+            self.operand = "0"
+        } else {
+            countButtonPressed()
+            calculator.operation = operation
+            self.operand = "0"
         }
         
-        
-        calculator.operands.append(operand)
-
+        lastPressedButton = sender
     }
     
     @IBAction func resetButtonPressed() {
-        calculator = nil
-        operand = "0"
-        updateUI()
+            calculator = nil
+            operand = "0"
+            updateUI()
     }
+    
     
     @IBAction func negativeOrPositivePressed() {
         if operand.contains("-") {
@@ -79,16 +89,32 @@ class ViewController: UIViewController {
     @IBAction func percentButtonPressed() {
         guard var unwrappedOperand = Double(operand) else {return}
         
-        unwrappedOperand = unwrappedOperand / 100
+        guard let value = calculator?.operands[0] else {
+            unwrappedOperand = unwrappedOperand / 100
+            operand = String(unwrappedOperand)
+            updateUI()
+            return
+        }
+        
+        unwrappedOperand = value / 100 * unwrappedOperand
         operand = String(unwrappedOperand)
         updateUI()
     }
     
     
     @IBAction func countButtonPressed() {
-        let result = calculator.result
-        calculator.operands[0] = result
-        textLabel.text = "\(result)"
+        guard let _ = calculator else {return}
+        guard var operand = Double(operand) else {return}
+        
+        calculator.operands.append(operand)
+        calculator.operands[0] = calculator.result
+        calculator.operands.removeLast()
+        operand = calculator.operands[0]
+        
+        self.operand = "\(operand)"
+        
+        lastPressedButton = resultButton
+        updateUI()
     }
     
 }
